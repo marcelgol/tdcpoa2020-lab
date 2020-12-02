@@ -58,3 +58,13 @@ stages:
         containerRegistry: $(dockerRegistryServiceConnection)
         tags: |
           $(tag)
+    
+    - task: AzureRmWebAppDeployment@4
+      inputs:
+        ConnectionType: 'AzureRM'
+        azureSubscription: 'Visual Studio Enterprise Subscription(249a316d-fc9d-4e07-bf47-4ab48ab2cb23)'
+        appType: 'webAppContainer'
+        WebAppName: 'tdcpoa2020-lab-dockerapp'
+        DockerNamespace: $(containerRegistry)
+        DockerRepository: $(imageRepository)
+        DockerImageTag: $(tag)
